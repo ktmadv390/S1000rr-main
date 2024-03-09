@@ -1,0 +1,22 @@
+Prac 4
+
+#include<Servo.h>
+int push=0;
+Servo servo_8;
+void setup()
+{
+  pinMode(4,INPUT);
+  Serial.begin(9600);
+  servo_8.attach(9,500,2500);
+}
+void loop()
+{
+  push=digitalRead(4);
+  Serial.println(push);
+  if(push==1){
+    servo_8.write(180);
+  } else {
+    servo_8.write(0);
+  }
+  delay(10);
+}
