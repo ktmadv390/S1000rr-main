@@ -254,3 +254,112 @@ int main()
     cout << "\nNumber of one's: " << count_if(output.begin(), output.end(), isOne);
     return 0;
 }
+
+
+// Design a program for creating machine that accepts decimal number divisible by 2
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    int q0 = 0, q1 = 1;
+    string str;
+    int currentState = q0;
+    char ch;
+    cout << "Enter a number: ";
+    cin >> str;
+    for (int i = 0; i < str.length(); ++i)
+    {
+        ch = str[i];
+        if (currentState == q0 && (ch == '0' || ch == '2' || ch == '4' || ch == '6' || ch == '8'))
+        {
+            currentState = q0;
+        }
+        else if (currentState == q0 && (ch == '1' || ch == '3' || ch == '5' || ch == '7' || ch == '9'))
+        {
+            currentState = q1;
+        }
+        else if (currentState == q1 && (ch == '0' || ch == '2' || ch == '4' || ch == '6' || ch == '8'))
+        {
+            currentState = q0;
+        }
+        else if (currentState == q1 && (ch == '1' || ch == '3' || ch == '5' || ch == '7' || ch == '9'))
+        {
+            currentState = q1;
+        }
+    }
+    if (currentState == q0)
+    {
+        cout << "\n"
+             << str << " number is divisible by 2";
+    }
+    else
+    {
+        cout << "\n"
+             << str << " number is not divisible by 2";
+    }
+    return 0;
+}
+
+
+/* Design a program for creating a machine which accepts string having equal no. of 1’s and 0’s */
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+bool isZero(char ch)
+{
+    return ch == '0';
+}
+bool isOne(char ch)
+{
+    return ch == '1';
+}
+int main()
+{
+    int q0 = 0, q1 = 1;
+    int currentState = q0;
+    string str;
+    string output = "";
+    char ch;
+    cout << "Enter string: ";
+    cin >> str;
+    for (int i = 0; i < str.length(); ++i)
+    {
+        ch = str[i];
+        if (currentState == q0 && ch == '0')
+        {
+            output += ch;
+            currentState = q0;
+        }
+        else if (currentState == q0 && ch == '1')
+        {
+            output += ch;
+            currentState = q1;
+        }
+        else if (currentState == q1 && ch == '0')
+        {
+            output += ch;
+            currentState = q0;
+        }
+        else if (currentState == q1 && ch == '1')
+        {
+            output += ch;
+            currentState = q1;
+        }
+    }
+    int zero = count_if(output.begin(), output.end(), isZero);
+    int one = count_if(output.begin(), output.end(), isOne);
+
+    cout << str << " has " << zero << " zero(s) and " << one << " one(s) " << endl;
+    if (zero == one)
+    {
+        cout << "String is acceptable";
+    }
+    if (zero != one)
+    {
+        cout << "String is not acceptable";
+    }
+    return 0;
+}
+
